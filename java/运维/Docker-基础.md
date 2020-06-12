@@ -254,3 +254,270 @@ docker run ‐d ‐p 91:80 nginx
 -p 宿主机端口:容器端口 #开放容器端口到宿主机端口
 
 访问 [http://Docker宿主机](#) IP:91/，将会看到nginx的主界面如下：
+
+
+
+#### **2、列出容器** 
+
+用 docker ps命令即可列出**运行中**的容器 
+
+```
+docker ps 
+```
+
+如需列出所有容器（包括已停止的容器），可使用-a参数。该列表包含了7列，含义如下 
+
+\- CONTAINER_ID：表示容器 ID。 
+
+\- IMAGE:表示镜像名称。 
+
+\- COMMAND：表示启动容器时运行的命令。 
+
+\- CREATED：表示容器的创建时间。 
+
+\- STATUS：表示容器运行的状态。UP表示运行中， Exited表示已停止。 
+
+\- PORTS:表示容器对外的端口号。 
+
+\- NAMES:表示容器名称。该名称默认由 Docker自动生成，也可使用 docker run命令的--name选项自行指定。 
+
+#### **3、停止容器** 
+
+使用 docker stop命令，即可停止容器 
+
+```
+docker stop f0b1c8ab3633 
+```
+
+其中f0b1c8ab3633是容器 ID,当然也可使用 docker stop容器名称来停止指定容器 
+
+#### **4、强制停止容器** 
+
+可使用 docker kill命令发送 SIGKILL信号来强制停止容器 
+
+```
+docker kill f0b1c8ab3633 
+```
+
+#### **5、****启动****已停止的容器** 
+
+使用docker run命令，即可**新建**并启动一个容器。对于已停止的容器，可使用 docker start命令来**启动** 
+
+```
+docker start f0b1c8ab3633 
+
+```
+
+#### **6、查看容器所有信息** 
+
+```
+docker inspect f0b1c8ab3633 
+```
+
+#### **7、查看容器日志** 
+
+```
+docker container logs f0b1c8ab3633
+```
+
+#### **8、查看容器里的进程** 
+
+```
+docker top f0b1c8ab3633 
+```
+
+#### **9、容器与宿主机相互复制文件** 
+
+从容器里面拷文件到宿主机： 
+
+1 docker cp 容器id:要拷贝的文件在容器里面的路径 宿主机的相应路径 
+
+2 如：docker cp 7aa5dc458f9d:/etc/nginx/nginx.conf /mydata/nginx 
+
+从宿主机拷文件到容器里面： 
+
+1 docker cp 要拷贝的宿主机文件路径 容器id:要拷贝到容器里面对应的路径 
+
+#### **10、进入容器** 
+
+使用docker exec命令用于进入一个正在运行的docker容器。如果docker run命令运行容器的时候，没有使用-it参数，就要用这 
+
+个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了 
+
+```
+docker exec ‐it f0b1c8ab3633 /bin/bash (有的容器需要把 /bin/bash 换成 sh) 
+```
+
+#### **11、容器内安装vim、ping、ifconfig等指令** 
+
+1 apt‐get update 
+
+2 apt‐get install vim #安装vim 
+
+3 apt‐get install iputils‐ping #安装ping 
+
+4 apt‐get install net‐tools #安装ifconfig 
+
+#### **12、删除容器** 
+
+使用 docker rm命令即可删除指定容器 
+
+```
+docker rm f0b1c8ab3633 
+```
+
+该命令只能删除**已停止**的容器，如需删除正在运行的容器，可使用-f参数 
+
+强制删除所有容器 
+
+```
+docker rm ‐f $(docker ps ‐a ‐q) 
+```
+
+## **将微服务运行在docker上** 
+
+### **使用Dockerfile构建Docker镜像** 
+
+Dockerfile是一个文本文件，其中包含了若干条指令，指令描述了构建镜像的细节 
+
+先来编写一个最简单的Dockerfile，以前文下载的Nginx镜像为例，来编写一个Dockerfile修改该Nginx镜像的首页 
+
+1、新建一个空文件夹docker-demo，在里面再新建文件夹app，在app目录下新建一个名为Dockerfile的文件，在里面增加如 
+
+下内容：
+
+```
+FROM nginx 
+
+RUN echo '<h1>This is Tuling Nginx!!!</h1>' > /usr/share/nginx/html/index.html 
+```
+
+该Dockerfile非常简单，其中的 FROM、 RUN都是 Dockerfile的指令。 FROM指令用于指定基础镜像， RUN指令用于执行命 
+
+令。
+
+2、在Dockerfile所在路径执行以下命令构建镜像： 
+
+```
+docker build ‐t nginx:tuling . 
+```
+
+其中，-t指定镜像名字，命令最后的点（.）表示Dockerfile文件所在路径 
+
+3、执行以下命令，即可使用该镜像启动一个 Docker容器 
+
+```
+docker run ‐d ‐p 92:80 nginx:tuling 
+```
+
+4、访问 http://Docker宿主机IP:92/，可看到下图所示界面
+
+**Dockerfile常用指令** 
+
+![1591946021381](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1591946021381.png)
+
+注意：RUN命令在 image 文件的构建阶段执行，执行结果都会打包进入 image 文件；CMD命令则是在容器启动后执行。另 
+
+外，一个 Dockerfile 可以包含多个RUN命令，但是只能有一个CMD命令。 
+
+注意，指定了CMD命令以后，docker container run命令就不能附加命令了（比如前面的/bin/bash），否则它会覆盖CMD命 
+
+令。
+
+### **使用Dockerfile构建微服务镜像** 
+
+以项目**05-ms-eureka-server**为例，将该微服务的可运行jar包构建成docker镜像 
+
+1、将jar包上传linux服务器/usr/local/docker-app/docker-demo/app/eureka目录，在jar包所在目录创建名为Dockerfile的文 
+
+件
+
+2、在Dockerfile中添加以下内容 
+
+```
+# 基于java镜像创建新镜像
+FROM java:8
+# 作者
+MAINTAINER tpp
+# 将jar包添加到容器中并更名为app.jar
+ADD  microservice‐eureka‐serve-0.0.1-RELEASE.jar /springboot.jar
+# 运行jar包
+ENTRYPOINT ["nohup","java","-jar","/springboot.jar","&"]
+```
+
+3、使用docker build命令构建镜像 
+
+```
+docker build ‐t microservice‐eureka‐server:0.0.1 . 
+```
+
+\# 格式： docker build -t 镜像名称:标签 Dockerfile的相对位置 
+
+在这里，使用-t选项指定了镜像的标签。执行该命令后，终端将会输出如下的内容4、启动镜像，加-d可在后台启动 
+
+```
+docker run ‐d ‐p 8761:8761 microservice‐eureka‐server:0.0.1 
+```
+
+使用 -v 可以挂载一个主机上的目录到容器的目录 
+
+```
+docker run ‐p 8761:8761 ‐v /log:/container‐log microservice‐eureka‐server:0.0.1 
+```
+
+5、访问http://Docker宿主机IP:8761/，可正常显示Eureka Server首页 
+
+
+
+## **Docker虚拟化原理**
+
+![1591946891503](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1591946891503.png)
+
+传统虚拟化和容器技术结构比较：传统虚拟化技术是在硬件层面实现虚拟化，增加了系统调用链路的环节，有性能损耗；容器虚 拟化技术以共享宿主机Kernel的方式实现，几乎没有性能损耗。 docker利用的是宿主机的内核,而不需要Guest OS。因此,当新建一个容器时,docker不需要和虚拟机一样重新加载一个操作系统 内核。避免了寻址、加载操作系统内核这些比较费时费资源的过程,当新建一个虚拟机时,虚拟机软件需要加载Guest OS,这个新建 过程是分钟级别的。而docker由于直接利用宿主机的操作系统,则省略了这个过程,因此新建一个docker容器只需要几秒钟。 
+
+![1591946936231](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1591946936231.png)
+
+**Docker是如何将机器的资源进行隔离的？** 
+
+答案是联合文件系统，常见的有AUFS、Overlay、devicemapper、BTRFS和ZFS等。 
+
+以Overlay2举例说明，Overlay2的架构图如下： 
+
+![1591946955669](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1591946955669.png)
+
+原理：overlayfs在linux主机上只有两层，一个目录在下层，用来保存镜像(docker)，另外一个目录在上层，用来存储容器信 息。在overlayfs中，底层的目录叫做lowerdir，顶层的目录称之为upperdir，对外提供统一的文件系统为merged。当需要修改 一个文件时，使用**COW(Copy-on-write)**将文件从只读的Lower复制到可写的Upper进行修改，结果也保存在Upper层。在 Docker中，底下的只读层就是image，可写层就是Container。 
+
+**写时复制 (CoW) 技术详解**所有驱动都用到的技术—写时复制，Cow全称copy-on-write，表示只是在需要写时才去复制，这个是**针对已有文件的修改场** 
+
+**景**。比如基于一个image启动多个Container，如果每个Container都去分配一个image一样的文件系统，那么将会占用大量的磁 
+
+盘空间。而CoW技术可以让所有的容器共享image的文件系统，所有数据都从image中读取，只有当要对文件进行写操作时，才 
+
+从image里把要写的文件复制到自己的文件系统进行修改。所以无论有多少个容器共享一个image，所做的写操作都是对从 
+
+image中复制到自己的文件系统的副本上进行，并不会修改image的源文件，且多个容器操作同一个文件，会在每个容器的文件 
+
+系统里生成一个副本，每个容器修改的都是自己的副本，互相隔离，互不影响。使用CoW可以有效的提高磁盘的利用率。**所以容** 
+
+**器占用的空间是很少的。** 
+
+**查看容器占用磁盘大小指令：** 
+
+```
+ # 查看所有容器的大小 
+ cd /var/lib/docker/containers # 进入docker容器存储目录 
+ du ‐sh * # 查看所有容器的大小 
+ du ‐sh <容器完整id> #查看某一个容器的大小 
+```
+
+
+
+**用时分配 （allocate-on-demand）** 
+
+用时分配是**针对原本没有这个文件的场景**，只有在要新写入一个文件时才分配空间，这样可以提高存储资源的利用率。比如启动 一个容器，并不会因为这个容器分配一些磁盘空间，而是当有新文件写入时，才按需分配新空间。 
+
+**docker中的镜像分层技术的原理是什么呢？** 
+
+docker使用共享技术减少镜像存储空间，所有镜像层和容器层都保存在宿主机的文件系统/var/lib/docker/中，由存储驱动进行 管理，尽管存储方式不尽相同，但在所有版本的Docker中都可以**共享镜像层**。在下载镜像时，Docker Daemon会检查镜像中的 镜像层与宿主机文件系统中的镜像层进行对比，如果存在则不下载，只下载不存在的镜像层，这样可以非常**节约存储空间**。
+
+![1591947065298](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1591947065298.png)
