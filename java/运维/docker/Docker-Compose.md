@@ -35,6 +35,7 @@ Compose的使用非常简单，只需要编写一个docker-compose.yml，然后�
 └── microservice-eureka-server-0.0.1-SNAPSHOT.jar 
 
 - 然后在docker-compose.yml 中添加内容如下： 
+- 
 
 ```
 version: '3' 
