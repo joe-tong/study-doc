@@ -1,0 +1,289 @@
+## Spring源码分析一: 常见底层核心注解
+
+### 框架功能整体 
+
+ ![1592119388(1)](1592119388(1).png)
+
+**基础模块:beans 和 core** 提供了提供 IoC （转控制）和依赖注入特性
+
+### 控制反转和依赖注入 
+
+```
+     什么是控制反转?我觉得有必要先了解软件设计的一个重要思想：依赖倒置原则（Dependency Inversion Principle ）
+```
+
+**IOC容器的最最最最核心思想........................** 
+
+```
+   ioc的思想最核心的地方在于，资源不由使用资源的双方管理，而由不使用资源的第三方管理，这可以带来很多好处。第 一，资源集中管理，实现资源的可配置和易管理。第二，降低了使用资源双方的依赖程度，也就是我们说的耦合度
+```
+
+ ![1592119937(1)](1592119937(1).png)
+
+**源码分析:**
+
+```
+BeanFactory最重要的2个类ClassPathXmlApplicationContext和AnnotionConfigApplicationContext
+```
+
+### 2.1创建Bean方法：
+
+①:基于xml的形式定义Bean的信息 
+
+```
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"> 
+
+//定义一个Bean的信息<bean id="car" class="com.tuling.compent.Car"
+></bean> 
+
+</beans>
+```
+
+去容器中读取Bean 
+
+```
+public static void main( String[] args ) { 
+
+ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml"); 
+
+System.out.println(ctx.getBean("person")); 
+} 
+```
+
+②:基于读取配置类的形式定义Bean信息 
+
+```
+@Configuration 
+public class MainConfig { 
+
+@Bean 
+public Person person(){ 
+return new Person(); 
+} 
+
+} 
+
+```
+
+**注意: 通过@Bean的形式是使用的话， bean的默认名称是方法名，若@Bean(value="bean的名称")** 
+
+**那么bean的名称是指定的**
+
+去容器中读取Bean的信息（传入配置类） 
+
+```
+public static void main( String[] args ){ 
+
+AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfig.class); 
+
+System.out.println(ctx.getBean("person")); 
+
+}
+
+```
+
+### 2.2在配置类上写@CompentScan注解来进行包扫描
+
+```
+@Configuration @ComponentScan(basePackages = {"com.tuling.testcompentscan"}) public class MainConfig { }
+```
+
+①:排除用法 excludeFilters(排除@Controller注解的,和TulingService的) 
+
+```
+@Configuration @ComponentScan(basePackages = {"com.tuling.testcompentscan"},excludeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION,value = {Controller.class}), @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,value = {TulingService.class}) })public class MainConfig { }
+```
+
+②:包含用法 includeFilters ,注意，若使用包含的用法，需要把useDefaultFilters属性设置为false（true表示扫描全部的）
+
+```
+@Configuration @ComponentScan(basePackages = {"com.tuling.testcompentscan"},includeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION,value = {Controller.class, Service.class}) },useDefaultFilters = false) public class MainConfig { }
+```
+
+③ @ComponentScan.Filter type的类型 
+
+a)注解形式的FilterType.ANNOTATION @Controller @Service @Repository @Compent 
+
+b)指定类型的 FilterType.ASSIGNABLE_TYPE @ComponentScan.Filter(type = 
+
+FilterType.ASSIGNABLE_TYPE,value = {TulingService.class}) 
+
+c)aspectj类型的 FilterType.ASPECTJ(不常用) 
+
+d)正则表达式的 FilterType.REGEX(不常用) 
+
+e)自定义的 FilterType.CUSTOM
+
+```
+public enum FilterType { //注解形式 比如@Controller @Service @Repository @Compent ANNOTATION, //指定的类型 ASSIGNABLE_TYPE, //aspectJ形式的 ASPECTJ, //正则表达式的 REGEX, //自定义的 CUSTOM }
+```
+
+③.①FilterType.CUSTOM 自定义类型如何使用
+
+```java
+public class TulingFilterType implements TypeFilter {
+    @Override
+    public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+
+        //获取当前类的注解源信息
+        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        //获取当前类的class的源信息 
+        ClassMetadata classMetadata = metadataReader.getClassMetadata();
+        //获取当前类的资源信息 
+        Resource resource = metadataReader.getResource();
+        if (classMetadata.getClassName().contains("dao")) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+@ComponentScan(basePackages = {"com.tuling.testcompentscan"},includeFilters = { @ComponentScan.Filter(type = FilterType.CUSTOM,value = TulingFilterType.class) },useDefaultFilters = false) public class MainConfig { }
+
+```
+
+### 2.3配置Bean的作用域对象
+
+
+①:在不指定@Scope的情况下，所有的bean都是单实例的bean,而且是饿汉加载(容器启动实例就创建 
+
+好了)
+
+```
+@Bean public Person person() { return new Person(); }
+```
+
+②:指定@Scope为 prototype 
+
+表示为多实例的，而且还是懒汉模式加载（IOC容器启动的时候，并不会创建对象，而是 
+
+在第一次使用的时候才会创建）
+
+```
+@Bean public Person person() { return new Person(); }
+```
+
+③:@Scope指定的作用域方法取值 
+
+a) singleton 单实例的(默认) 
+
+b) prototype 多实例的 
+
+c) request 同一次请求 
+
+d) session 同一个会话级别 
+
+### 2.5@Conditional进行条件判断等. 
+
+场景,有二个组件TulingAspect 和TulingLog ，我的TulingLog组件是依赖于TulingAspect的组件 
+
+应用:自己创建一个TulingCondition的类 实现Condition接口 
+
+```java
+public class TulingCondition implements Condition {
+    /**
+     * * @param context * @param metadata * @return
+     */
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        //判断容器中是否有tulingAspect的组件 
+        if (context.getBeanFactory().containsBean("tulingAspect")) {
+            return true;
+        }
+        return false;
+    }
+}
+
+public class MainConfig {
+    @Bean
+    public TulingAspect tulingAspect() {
+        return new TulingAspect();
+    }//当切 容器中有tulingAspect的组件，那么tulingLog才会被实例化.// 
+
+    @Bean
+    @Conditional(value = TulingCondition.class)
+    public TulingLog tulingLog() {
+        return new TulingLog();
+    }
+}
+```
+
+### 2.6往IOC 容器中添加组件的方式(重点)
+
+①:通过@CompentScan +@Controller @Service @Respository @compent 
+
+适用场景: 针对我们自己写的组件可以通过该方式来进行加载到容器中。 
+
+②:通过@Bean的方式来导入组件(适用于导入第三方组件的类) 
+
+③:通过@Import来导入组件 （导入组件的id为全类名路径） **（应用场景:整合第三方组件微信等等）**
+
+```
+@Configuration @Import(value = {Person.class, Car.class}) public class MainConfig { }
+```
+
+通过@Import 的ImportSeletor类实现组件的导入 (导入组件的id为全类名路径) 
+
+```
+public class TulingImportSelector implements ImportSelector {
+    //可以获取导入类的注解信息
+    @Override
+
+    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+        return new String[]{"com.tuling.testimport.compent.Dog"};
+    }
+}
+
+@Configuration
+@Import(value = {Person.class, Car.class, TulingImportSelector.class})
+public class MainConfig {
+}
+```
+
+通过@Import的 ImportBeanDefinitionRegister导入组件 (可以指定bean的名称) 
+
+```
+public class TulingBeanDefinitionRegister implements ImportBeanDefinitionRegistrar {
+    @Override
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        //创建一个bean定义对象
+        RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(Cat.class);
+        //把bean定义对象导入到容器中
+        registry.registerBeanDefinition("cat", rootBeanDefinition);
+    }
+}
+
+@Configuration
+//@Import(value = {Person.class, Car.class}) 
+// @Import(value = {Person.class, Car.class, TulingImportSelector.class})
+@Import(value = {Person.class, Car.class, TulingImportSelector.class, TulingBeanDefinitionRegister.class})
+public class MainConfig {
+}
+```
+
+④:通过实现FacotryBean接口来实现注册 组件**（应用场景: 复杂对象初始化）**
+
+```
+public class CarFactoryBean implements FactoryBean<Car> { 
+    //返回bean的对象@Override
+
+    public Car getObject() throws Exception {
+        return new Car();
+    }
+    //返回bean的类型
+    @Override
+    public Class<?> getObjectType() {
+        return Car.class;
+    }//是否为单利
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
+}
+```
+
+### 2.7Bean的初始化方法和销毁方法(重点)
