@@ -287,3 +287,397 @@ public class CarFactoryBean implements FactoryBean<Car> {
 ```
 
 ### 2.7Bean的初始化方法和销毁方法(重点)
+
+①:什么是bean的生命周期? 
+
+bean的创建----->初始化----->销毁方法 
+
+由容器管理Bean的生命周期，我们可以通过自己指定bean的初始化方法和bean的销毁方法 
+
+```
+@Configuration public class MainConfig { 
+//指定了bean的生命周期的初始化方法和销毁方法.
+@Bean(initMethod = "init",destroyMethod = "destroy") 
+public Car car() { return new Car(); } }
+```
+
+针对单实例bean的话，容器启动的时候，bean的对象就创建了，而且容器销毁的时候，也会调用Bean的销毁方法 
+
+针对多实例bean的话,容器启动的时候，bean是不会被创建的而是在获取bean的时候被创建，而且bean的销毁不受
+
+②:通过 InitializingBean和DisposableBean 的二个接口实现bean的初始化以及销毁方法**(应用场景:属性的校验和拷贝)**
+
+```
+@Component
+public class Person implements InitializingBean, DisposableBean {
+    public Person() {
+        System.out.println("Person的构造方法");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("DisposableBean的destroy()方法 ");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("InitializingBean的 afterPropertiesSet方法");
+    }
+}
+```
+
+③:通过JSR250规范 提供的注解@PostConstruct 和@ProDestory标注的方法 
+
+```
+@Component
+public class Book {
+    public Book() {
+        System.out.println("book 的构造方法");
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("book 的PostConstruct标志的方法");
+    }
+
+    @PreDestroy
+    public void destory() {
+        System.out.println("book 的PreDestory标注的方法");
+    }
+}
+```
+
+④:通过Spring的BeanPostProcessor的 bean的后置处理器会拦截所有bean创建过程 
+
+postProcessBeforeInitialization 
+
+在init方法之前调用 
+
+postProcessAfterInitialization 
+
+在init方法之后调用
+
+```
+@Component
+public class TulingBeanPostProcessor implements BeanPostProcessor {
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("TulingBeanPostProcessor...postProcessBeforeInitialization:" + beanName);
+        return bean;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.out.println("TulingBeanPostProcessor...postProcessAfterInitialization:" + beanName);
+        return bean;
+    }
+}
+```
+
+BeanPostProcessor的执行时机
+
+```
+populateBean(beanName, mbd, instanceWrapper) 
+initializeBean{    
+        applyBeanPostProcessorsBeforeInitialization() invokeInitMethods{
+        isInitializingBean.afterPropertiesSet  自定义的init方法}
+        applyBeanPostProcessorsAfterInitialization()方法 }
+```
+
+### 2.8通过@Value +@PropertySource来给组件赋值 
+
+```
+public class Person {
+    //通过普通的方式 
+    @Value("司马")
+    private String firstName;
+    //spel方式来赋值
+    @Value("#{28-8}")
+    private Integer age;
+    //通过读取外部配置文件的值 
+    @Value("${person.lastName}")
+    private String lastName;
+}
+
+@Configuration
+@PropertySource(value = {"classpath:person.properties"})
+//指定外部文件的位置 
+public class MainConfig {
+    @Bean
+    public Person person() {
+        return new Person();
+    }
+}
+```
+
+### 2.9）自动装配
+
+@AutoWired的使用 
+
+自动注入: 
+
+```
+//一个Dao 
+
+@Repository 
+public class TulingDao { 
+}
+
+@Service 
+public class TulingService { 
+@Autowired 
+private TulingDao tulingDao; 
+
+｝
+```
+
+结论: 
+
+a:自动装配首先时按照类型进行装配，若在IOC容器中发现了多个相同类型的组件，那么就按照 属性名称来进行装配 
+
+@Autowired 
+
+private TulingDao tulingDao; 
+
+比如，我容器中有二个TulingDao类型的组件 一个叫tulingDao 一个叫tulingDao2 
+
+那么我们通过@AutoWired 来修饰的属性名称时tulingDao，那么拿就加载容器的tulingDao组件，若属性名称为 
+
+tulignDao2 那么他就加载的时tulingDao2组件 
+
+b：假设我们需要指定特定的组件来进行装配，我们可以通过使用@Qualifier("tulingDao")来指定装配的组件 
+
+或者在配置类上的@Bean加上@Primary注解 
+
+```
+@Autowired 
+@Qualifier("tulingDao") 
+private TulingDao tulingDao2; 
+```
+
+c：假设我们容器中即没有tulingDao 和tulingDao2,那么在装配的时候就会抛出异常 
+
+No qualifying bean of type 'com.tuling.testautowired.TulingDao' available 
+
+若我们想不抛异常 ，我们需要指定 required为false的时候可以了 
+
+```
+@Autowired(required = false) 
+@Qualifier("tulingDao") 
+private TulingDao tulingDao2;
+
+```
+
+d:@Resource(JSR250规范) 
+
+功能和@AutoWired的功能差不多一样，但是不支持@Primary 和@Qualifier的支持 
+
+e:@InJect（JSR330规范） 
+
+需要导入jar包依赖 
+
+功能和支持@Primary功能 ,但是没有Require=false的功能
+
+```
+<dependency> 
+
+<groupId>javax.inject</groupId> 
+
+<artifactId>javax.inject</artifactId> 
+
+<version>1</version> 
+
+</dependency>
+
+```
+
+ 
+
+f：使用autowired 可以标注在方法上 
+
+标注在set方法上 
+
+```
+//@Autowired 
+
+public void setTulingLog(TulingLog tulingLog) { 
+
+this.tulingLog = tulingLog; 
+
+} 
+```
+
+标注在构造方法上 
+
+```
+@Autowired 
+
+public TulingAspect(TulingLog tulingLog) { 
+
+this.tulingLog = tulingLog; 
+
+} 
+```
+
+标注在配置类上的入参中（可以不写） 
+
+```
+@Bean 
+
+public TulingAspect tulingAspect(@Autowired TulingLog tulingLog) { 
+
+TulingAspect tulingAspect = new TulingAspect(tulingLog); 
+
+return tulingAspect; 
+
+} 
+```
+
+3.0 我们自己的组件 需要使用spring ioc的底层组件的时候,比如 ApplicationContext等 
+
+### 我们可以通过实现XXXAware接口来实现 
+
+```
+@Component 
+
+public class TulingCompent implements ApplicationContextAware,BeanNameAware { 
+
+private ApplicationContext applicationContext; 
+
+@Override 
+
+public void setBeanName(String name) { 
+
+System.out.println("current bean name is :【"+name+"】"); 
+
+}
+
+@Override 
+
+public void setApplicationContext(ApplicationContext applicationContext) throws BeansException { 
+
+this.applicationContext = applicationContext; 
+
+} 
+
+} 
+
+```
+
+
+
+#### 3.1通过@Profile注解 来根据环境来激活标识不同的Bean 
+
+@Profile标识在类上，那么只有当前环境匹配，整个配置类才会生效 
+
+@Profile标识在Bean上 ，那么只有当前环境的Bean才会被激活没有标志为@Profile的bean 不管在什么环境都可以被激活 
+
+```
+@Configuration 
+
+@PropertySource(value = {"classpath:ds.properties"}) 
+
+public class MainConfig implements EmbeddedValueResolverAware { 
+
+@Value("${ds.username}") 
+
+private String userName; 
+
+@Value("${ds.password}") 
+
+private String password; 
+
+private String jdbcUrl; 
+
+private String classDriver; 
+
+@Override 
+
+public void setEmbeddedValueResolver(StringValueResolver resolver) { 
+
+this.jdbcUrl = resolver.resolveStringValue("${ds.jdbcUrl}"); 
+
+this.classDriver = resolver.resolveStringValue("${ds.classDriver}"); 
+
+}
+
+//标识为测试环境才会被装配 
+
+@Bean 
+
+@Profile(value = "test") 
+
+public DataSource testDs() { 
+
+return buliderDataSource(new DruidDataSource()); 
+
+}
+
+//标识开发环境才会被激活 
+
+@Bean 
+
+@Profile(value = "dev") 
+
+public DataSource devDs() { 
+
+return buliderDataSource(new DruidDataSource()); 
+
+}
+
+//标识生产环境才会被激活 
+
+@Bean 
+
+@Profile(value = "prod") 
+
+public DataSource prodDs() { 
+
+return buliderDataSource(new DruidDataSource()); 
+
+}
+
+private DataSource buliderDataSource(DruidDataSource dataSource) { 
+
+dataSource.setUsername(userName); 
+
+dataSource.setPassword(password); 
+
+dataSource.setDriverClassName(classDriver); 
+
+dataSource.setUrl(jdbcUrl); 
+
+return dataSource; 
+
+} 
+
+} 
+
+```
+
+
+
+激活切换环境的方法 
+
+方法一:通过运行时jvm参数来切换 -Dspring.profiles.active=test|dev|prod 
+
+方法二:通过代码的方式来激活 
+
+```
+public static void main(String[] args) {AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(); 
+
+ctx.getEnvironment().setActiveProfiles("test","dev"); 
+
+ctx.register(MainConfig.class); 
+
+ctx.refresh(); 
+
+printBeanName(ctx); 
+
+} 
+
+```
+
+
+
+
