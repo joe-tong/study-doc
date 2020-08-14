@@ -209,4 +209,3 @@ AopProxyFactory 根据 AdvisedSupport 对象的配置来决定。默认的策略
 ### 8.2 MVC常用注解
 
 ![1597308154073](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597308154073.png)
-

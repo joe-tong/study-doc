@@ -313,3 +313,8 @@ cache 中。而声明变量是 volatile 的，JVM 保证了每次读变量都从
 ## 8.AQS（同步器AbstractQueuedSynchronizer）
 
 AQS 定义了一套多线程访问 共享资源的同步器框架
+
+## 9.Unsafe 
+
+![1597371011(1)](Java并发篇.assets/1597371011(1).png)
+
