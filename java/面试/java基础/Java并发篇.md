@@ -1,10 +1,10 @@
 # Java并发篇
 
-![juc](C:\Users\Administrator\Pictures\juc.png)
+![juc.png](https://ae03.alicdn.com/kf/Ua7faa831f6b24e429c9810996f52cfc1m.jpg)
 
-![1597134495777](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597134495777.png)
+![1597134495777.png](https://ae03.alicdn.com/kf/U73addd47fbf043cca53de4e4abb7301aP.jpg)
 
-![1597134337350](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597134337350.png)
+![1597134337350.png](https://ae02.alicdn.com/kf/U5ba1c8eeb6664b0bb24df047bc2adf6f5.jpg)
 
 ## 1. Java锁
 
@@ -27,7 +27,7 @@
 
 #### 1.4.2  实现
 
-![1597200964447](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597200964447.png)
+![1597200964447.png](https://ae03.alicdn.com/kf/Uca0469e2da264fc98bb1146ce54bf337G.jpg)
 
 ### 1.5 ReentrantLock
 
@@ -103,7 +103,7 @@ JDK1.6 以后，为了减少获得锁和释放锁所带来的性能消耗，提�
 
 ## 2.线程
 
-![1597213674116](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597213674116.png)
+![1597213674116.png](https://ae03.alicdn.com/kf/U9534a9b4aa584a94a2497327d819daf9G.jpg)
 
 ### 2.1 **线程基本方法** 
 
@@ -161,7 +161,7 @@ JDK1.6 以后，为了减少获得锁和释放锁所带来的性能消耗，提�
 
 上下文切换。时间片轮转的方式使多个任务在同一颗 CPU 上执行变成了可能
 
-![1597214670536](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597214670536.png)
+![1597214670536.png](https://ae02.alicdn.com/kf/Ue2712f0d5fa640fba6ff28102e7b6d89g.jpg)
 
 #### 2.2.1 进程
 
@@ -201,7 +201,7 @@ JDK1.6 以后，为了减少获得锁和释放锁所带来的性能消耗，提�
 
 4. 任务队列：用于存放待处理的任务，提供一种缓冲机制
 
-![1597219272759](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597219272759.png)
+![1597219272759.png](https://ae04.alicdn.com/kf/U1ebd33b4ee2d426aaca9b9081a26705dB.jpg)
 
 
 
@@ -290,7 +290,7 @@ barrier，当调用 await()方法之后，线程就处于 barrier 了。
 - 禁止重排序
 - 变量可见性
 
-![1597226618563](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597226618563.png)
+![1597226618563.png](https://ae01.alicdn.com/kf/U87a1ffd2d30a4ceaa42e11036785bd91P.jpg)
 
 当对非 volatile 变量进行读写的时候，每个线程先从内存拷贝变量到 CPU 缓存中。如果计算机有 
 
@@ -316,5 +316,4 @@ AQS 定义了一套多线程访问 共享资源的同步器框架
 
 ## 9.Unsafe 
 
-![1597371011(1)](Java并发篇.assets/1597371011(1).png)
-
+![1597371011_1_.png](https://ae03.alicdn.com/kf/U449608813f3e4d5a9e6cefbce0430326C.jpg)

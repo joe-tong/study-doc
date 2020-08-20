@@ -2,25 +2,23 @@
 
 ## 1.Spring特征
 
-![1597302060682](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302060682.png)
+![1597302060682.png](https://ae03.alicdn.com/kf/Ubbee567c2f2d43bb9481219ff09ff3e9g.jpg)
 
 ## 2.Spring核心组件
 
-
-
-![1597302131737](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302131737.png)
+![1597302131737.png](https://ae03.alicdn.com/kf/U7e579d026fb44739b892030035c2413by.jpg)
 
 ## 3.Spring 常用模块
 
-![1597302219994](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302219994.png)
+![1597302219994.png](https://ae03.alicdn.com/kf/U750c89241e284771b1fe51642cfbe888c.jpg)
 
 ## 4.**Spring** **常用注解** 
 
-![1597302251701](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302251701.png)
+![1597302251701.png](https://ae03.alicdn.com/kf/U7a15e5f987f64d6e89bf657ed6943b16k.jpg)
 
 ## 5.Spring第三方结合
 
-![1597302286731](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302286731.png)
+![1597302286731.png](https://ae04.alicdn.com/kf/U3e4192372a0d4b2ca40c862b123daba4Z.jpg)
 
 ## 6.Spring IOC 原理
 
@@ -30,7 +28,7 @@ Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系，利�
 
 ### 6.2 高层视图
 
-![1597302421870](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597302421870.png)
+![1597302421870.png](https://ae02.alicdn.com/kf/U90cf8c7446994bcabc0ba90be766694da.jpg)
 
 ### 6.3 实现
 
@@ -38,7 +36,7 @@ Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系，利�
 
 ​       BeanFactory 是 Spring 框架的基础设施，**面向 Spring 本身**；ApplicationContext 面向使用 **Spring 框架的开发者**，几乎所有的应用场合我们都直接使用 ApplicationContext 而非底层 的 BeanFactory。
 
-![1597303057554](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597303057554.png)
+![1597303057554.png](https://ae03.alicdn.com/kf/Ud4a69dc1b3ec4bdab4ff4b7a67eebbefb.jpg)
 
 ##### 6.3.1.1 ListableBeanFactory
 
@@ -79,7 +77,7 @@ Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系，利�
 
 上，还通过多个其他的接口扩展了 BeanFactory 的功能：
 
-![1597304558723](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597304558723.png)
+![1597304558723.png](https://ae04.alicdn.com/kf/Ue05167adafa14c49b4887486ed83fc22X.jpg)
 
 ##### 6.3.2.1 ClassPathXmlApplicationContext：默认从类路径加载配置文件
 
@@ -122,7 +120,7 @@ session 请求创建新的实例，而不同的实例之间不共享属性，且
 
 ###  6.5.Spring Bean 生命周期
 
-![1597305247252](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597305247252.png)
+![1597305247252.png](https://ae04.alicdn.com/kf/U4d07273530e74157a307547f128ad224q.jpg)
 
 1、实例化
 
@@ -186,7 +184,7 @@ Spring 装配包括手动装配和自动装配，手动装配是有基于 xml �
 
 ## 7. Spring APO 原理
 
-![1597307575178](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597307575178.png)
+![1597307575178.png](https://ae02.alicdn.com/kf/U45f4feca6deb4563a3fdd547a3f1c197N.jpg)
 
 ### 7.1 概念
 
@@ -204,8 +202,8 @@ AopProxyFactory 根据 AdvisedSupport 对象的配置来决定。默认的策略
 
 ### 8.1 MVC流程
 
-![1597307734591](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597307734591.png)
+![1597307734591.png](https://ae04.alicdn.com/kf/U6f78ae8235d04eabbb852ea1de94eba3v.jpg)
 
 ### 8.2 MVC常用注解
 
-![1597308154073](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597308154073.png)
+![1597308154073.png](https://ae01.alicdn.com/kf/U79e9a44281464d29bedf2162b0715396x.jpg)

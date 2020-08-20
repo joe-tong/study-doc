@@ -16,7 +16,7 @@
 
 ### Spring 总共有十几个组件，但是真正核心的组件只有几个，下面是 Spring 框架的总体架构图：
 
-##### ![1594616710462](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1594616710462.png)
+##### ![1594616710462.png](https://ae02.alicdn.com/kf/Ucc36076c330d432ca7f13fca62b21b36T.jpg)
 
 ​         从上图中可以看出 Spring 框架中的核心组件只有三个：Core、Context 和 Beans。它们构建起了整个 Spring 的骨骼架构。没有它们就不可能有 AOP、Web 等上层的特性功能。下面也将主要从这三个组件入手分析 Spring
 
@@ -40,19 +40,19 @@
 
 **1.1 Spring Bean 的创建时典型的工厂模式，他的顶级接口是 BeanFactory**
 
-![beanFactory](E:\stady_doc\java\框架\spring\spring源码分析\beanFactory.png)
+![beanFactory.png](https://ae02.alicdn.com/kf/U390739aa8725488e8566f1387a69fe11T.jpg)
 
 ​           BeanFactory 有三个子类：ListableBeanFactory、HierarchicalBeanFactory 和 AutowireCapableBeanFactory。但是从上图中我们可以发现最终的默认实现类是 **DefaultListableBeanFactory**，他实现了所有的接口。那为何要定义这么多层次的接口呢？查阅这些接口的源码和说明发现，每个接口 都有他使用的场合，它主要是为了区分在 Spring 内部在操作过程中对象的传递和转化过程中，对对象的数据访问所做的限制。例如 ListableBeanFactory 接口表示这些 Bean 是可列表的，而 HierarchicalBeanFactory 表示的是这些 Bean 是有继承关系的，也就是每个 Bean 有可能有父 Bean。AutowireCapableBeanFactory 接口定义 Bean 的自动装配规则。这四个接口共同定义了 Bean 的集合、Bean 之间的关系、以及 Bean 行为。
 
 **1.2 Bean 的定义主要有 BeanDefinition 描述**
 
-![BeanDefinition](E:\stady_doc\java\框架\spring\spring源码分析\BeanDefinition.png)
+![duvhVI.png](https://s1.ax1x.com/2020/08/18/duvhVI.png)
 
 **1.3 Bean 的解析类**
 
 ​       Bean 的定义就是完整的描述了在 Spring 的配置文件中你定义的 <bean/> 节点中所有的信息，包括各种子节点。当 Spring 成功解析你定义的一个 <bean/> 节点后，在 Spring 的内部他就被转化成 BeanDefinition 对象。以后所有的操作都是对这个对象完成的。Bean 的解析过程非常复杂，功能被分的很细，因为这里需要被扩展的地方很多，必须保证有足够的灵活性，以应对可能的变化。Bean 的解析主要就是对 Spring 配置文件的解析。这个解析过程主要通过下图中的类完成：
 
-![BeanParse](E:\stady_doc\java\框架\spring\spring源码分析\BeanParse.png)
+[![duvTG8.png](https://s1.ax1x.com/2020/08/18/duvTG8.png)](https://imgchr.com/i/duvTG8)
 
 ### 2.Context 组件
 
@@ -60,7 +60,7 @@
 
 ​        ApplicationContext 是 Context 的顶级父类，他除了能标识一个应用环境的基本信息外，他还继承了五个接口，这五个接口主要是扩展了 Context 的功能。下面是 Context 的类结构图：
 
-![applicationContext](E:\stady_doc\java\框架\spring\spring源码分析\applicationContext.png)
+![BeanDefinition.png](https://ae02.alicdn.com/kf/U289914d1e0604cc48097257dcbfd281fR.jpg)
 
 ####  ApplicationContext 继承了2大核心 BeanFactory和ResourceLoader ，
 
@@ -325,7 +325,7 @@ public class ConfigurationClassParser{
 
 ​         完成bean的实例化创建，实例化过程如时序图展示
 
-![spring-init-bean](E:\stady_doc\java\框架\spring\spring源码分析\spring-init-bean.png)
+![duvsPK.png](https://s1.ax1x.com/2020/08/18/duvsPK.png)
 
 # Ioc 容器的扩展点
 

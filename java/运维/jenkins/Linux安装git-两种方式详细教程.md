@@ -18,7 +18,7 @@ Git 是用于 Linux[内核](https://baike.baidu.com/item/%E5%86%85%E6%A0%B8)开�
 yum -y install git
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps1.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/17b58a4dc2b8229a.jpg) 
 
  2.输入 git --version查看Git是否安装完成以及查看其版本号
 
@@ -26,7 +26,7 @@ yum -y install git
  git --version
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps2.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/69b7a75474298ebc.jpg)  
 
 
 
@@ -44,13 +44,13 @@ yum -y remove git
 
 https://github.com/git/git/releases
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps3.jpg) 
+![wps3.jpg](https://ae02.alicdn.com/kf/Ud9d2ed6ed2134242948759313f134028p.jpg) 
 
  
 
 3.下载最新版本的tar.gz的Git到本地电脑上，利用Xftp工具将压缩包上传至Linux服务器的/usr/local目录下
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps4.jpg) 
+![wps4.jpg](https://ae04.alicdn.com/kf/U546ecdc12077462a8051293fc195c64aU.jpg) 
 
  
 
@@ -60,7 +60,7 @@ https://github.com/git/git/releases
 tar -zxvf git-2.25.4.tar.gz
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps5.jpg) 
+![wps2.jpg](https://ae02.alicdn.com/kf/Ue31a0034378441e7bacfaf0f288924deJ.jpg) 
 
 5.拿到解压后的源码以后我们需要编译源码了，不过在此之前需要安装编译所需要的依赖。
 
@@ -68,7 +68,7 @@ tar -zxvf git-2.25.4.tar.gz
 yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
 ```
 
- ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps6.jpg)
+ ![](https://ftp.bmp.ovh/imgs/2020/08/41a6432e17a361cd.jpg) 
 
  
 

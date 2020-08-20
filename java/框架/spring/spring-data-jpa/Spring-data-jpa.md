@@ -74,7 +74,7 @@ public void testGetByIdAndName() {
 
 ​        直接在接口中定义方法，如果符合规范，则不用写实现。目前支持的关键字写法如下：
 
-​        ![img](https://images2018.cnblogs.com/blog/1222688/201807/1222688-20180711202018082-2115608978.png)
+​        ![](https://images2018.cnblogs.com/blog/1222688/201807/1222688-20180711202018082-2115608978.png)
 
 ​        ![img](https://images2018.cnblogs.com/blog/1222688/201807/1222688-20180711202018967-488914275.png)
 

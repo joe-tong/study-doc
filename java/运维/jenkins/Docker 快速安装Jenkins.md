@@ -11,7 +11,7 @@
 
 **三、jenkins基本工作原理**
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps1.jpg) 
+![wps1.jpg](https://ae02.alicdn.com/kf/U500ae95dedf0494ab7cd0b21bc4c2b08l.jpg) 
 
  
 
@@ -33,7 +33,7 @@
 docker pull jenkins/jenkins
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps2.jpg) 
+![wps2.jpg](https://ae02.alicdn.com/kf/U980545519131417197e0e0f9472fbe600.jpg) 
 
  
 
@@ -75,7 +75,7 @@ cp /usr/local/apache-maven-3.6.3 /var/jenkins_home/
 
 
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps3.jpg) 
+![wps3.jpg](https://ae04.alicdn.com/kf/U976edecbf44b4eac96b07e382b932995A.jpg) 
 
  4.查看jenkins是否启动成功，如下图出现端口号，就为启动成功了
 
@@ -83,7 +83,7 @@ cp /usr/local/apache-maven-3.6.3 /var/jenkins_home/
 docker ps -l
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps4.jpg) 
+![wps4.jpg](https://ae04.alicdn.com/kf/U56a155ae64454b389ccb46e0f26d7dd2v.jpg) 
 
  5.查看docker容器日志。
 
@@ -91,7 +91,7 @@ docker ps -l
 docker logs myjenkins
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps5.jpg) 
+![wps5.jpg](https://ae02.alicdn.com/kf/U165d059dc12b40b8bbc2b640b1786821n.jpg) 
 
  6.配置镜像加速，进入 cd /var/jenkins_home/ 目录。
 
@@ -99,7 +99,7 @@ docker logs myjenkins
 cd /var/jenkins_home/
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps6.jpg) 
+![wps6.jpg](https://ae04.alicdn.com/kf/Ud61833e036e34a9282216562cb21c62bD.jpg) 
 
 **修改里的内容**
 
@@ -109,19 +109,19 @@ vi  hudson.model.UpdateCenter.xml
 
 **修改前**
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps7.jpg) 
+![wps7.jpg](https://ae04.alicdn.com/kf/Ueb4370a83b1842a6ab67bcd2cf70dae6z.jpg) 
 
 将 url 修改为 清华大学官方镜像：https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json    或者 http://mirror.esuni.jp/jenkins/updates/update-center.json
 
 **修改后**
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps8.jpg) 
+![wps8.jpg](https://ae02.alicdn.com/kf/Ud6636063ce484bf69f54a7d685b4dab5s.jpg) 
 
  
 
  7.访问Jenkins页面，输入你的ip加上10240
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml7784\wps9.jpg) 
+![wps9.jpg](https://ae04.alicdn.com/kf/Ud4c43ddb2d9d41f1baf0d6a0b9ec6192I.jpg) 
 
  
 

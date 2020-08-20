@@ -1,6 +1,6 @@
 # JVM
 
-![1597045286506](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597045286506.png)
+![1597045286506.png](https://ae04.alicdn.com/kf/U67e871594b9f4b4c9ff5f3670e053a66I.jpg)
 
 ## 1.Java代码的执行
 
@@ -10,9 +10,9 @@
 
 ### 2.1内存空间
 
-![1597046152230](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597046152230.png)
+![1597046152230.png](https://ae03.alicdn.com/kf/U824f851969ef4d81a3cc21e75efa733fC.jpg)
 
-![1597046308784](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597046308784.png)
+![1597046308784.png](https://ae03.alicdn.com/kf/U05aeccc7d02a47498508aaf8f0497328V.jpg)
 
 线程共享数据区域
 
@@ -90,7 +90,7 @@ MajorGC 采用标记清除算法
 
 ## 2.3 内存回收
 
-![1597048948322](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597048948322.png)
+![1597048948322.png](https://ae01.alicdn.com/kf/U7e02953dcf244d6481c01bcad7179c18o.jpg)
 
 ### 2.3.1 如何确定是垃圾
 
@@ -160,7 +160,7 @@ MajorGC 采用标记清除算法
 
 ### 2.3.3 **GC** 垃圾收集器
 
-![1597051717611](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597051717611.png)
+![1597051717611.png](https://ae03.alicdn.com/kf/U0f3583194e6844f5913955c168a0c97e1.jpg)
 
 #### 2.3.3.1 Serial **垃圾收集器（单线程、复制算法）**
 
@@ -189,7 +189,7 @@ JVM 类加载机制分为五个部分：加载，验证，准备，解析，初�
 
 五个过程。
 
-![1597052496205](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597052496205.png)
+![1597052496205.png](https://ae02.alicdn.com/kf/Ub3652c89e80745f69b749ce77177c8d7W.jpg)
 
 ### 3.1 类加载过程
 
@@ -231,7 +231,7 @@ JVM 类加载机制分为五个部分：加载，验证，准备，解析，初�
 
 JVM 通过双亲委派模型进行类的加载，当然我们也可以通过继承 java.lang.ClassLoader 实现自定义的类加载器。
 
-![1597112596908](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597112596908.png)
+![1597112596908.png](https://ae04.alicdn.com/kf/Uf005afd144cd4957b5bc3033a4406981s.jpg)
 
 ### 3.3 **双亲委派** 
 

@@ -18,7 +18,7 @@
 
 ##### 1.创建DelayTask 实现Delayed
 
-##### ![1596699988849](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596699988849.png)                              
+##### ![1596699988849.png](https://ae04.alicdn.com/kf/U918515ff9ee64fce9b0959ae2d70fbd5d.jpg)                              
 
 属性说明：
 
@@ -38,7 +38,7 @@
 
 ##### 2.创建延迟队列处理器
 
-![1596701665397](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596701665397.png)
+![1596701665397.png](https://ae02.alicdn.com/kf/Ue36972d52f2d4423a6d6de7bef88b018o.jpg)
 
 说明：
 
@@ -50,11 +50,11 @@
 
 ##### 3.创建Test类
 
-![test](C:\Users\Administrator\Pictures\test.png)
+![test.png](https://ae03.alicdn.com/kf/U32619f77122140a8a0c803db9c4b5b91Z.jpg)
 
 输出结果：
 
-![1596702046505](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596702046505.png)
+![1596702046505.png](https://ae04.alicdn.com/kf/U16599d769888456399795735c93fb8d2P.jpg)
 
 ### 如果还有什么不懂，欢迎在下面留言！！！
 

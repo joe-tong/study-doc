@@ -2,7 +2,7 @@
 
 ## 一、JDK介绍
 
-　　![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps7.jpg)
+ ![](https://ftp.bmp.ovh/imgs/2020/08/62e92f721fb92cb2.jpg) 
 
  
 
@@ -43,7 +43,7 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
 
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps8.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/e5b92f4a25249f29.jpg)  
 
  
 
@@ -57,7 +57,7 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
 rpm -i jdk-8u131-linux-x64.rpm
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps9.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/b2cca30f67c5ca4a.jpg)  
 
 6、修改环境变量
 
@@ -86,10 +86,7 @@ source /etc/profile
 java -version
 ```
 
-
-
- 
-
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps10.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/ea3b44bad2c054e4.jpg)  
 
  
+

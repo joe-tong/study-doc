@@ -2,17 +2,17 @@
 
 ## 1.JAVA 异常分类及处理
 
-![1597300638620](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597300638620.png)
+![1597300638620.png](https://ae04.alicdn.com/kf/U5c207d4f74ca4149b36613aef2e523d6X.jpg)
 
 ## 2.JAVA 反射
 
-![1597300756374](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597300756374.png)
+![1597300756374.png](https://ae03.alicdn.com/kf/U37131c7a99774114a13e0e6803e0f86dJ.jpg)
 
 反射机制是指在运行状态中，对于任意一个类都能够知道这个类所有的属性和方法； 并且对于任意一个对象，都能够调用它的任意一个方法
 
 ## 3.JAVA 注解
 
-![注解](C:\Users\Administrator\Pictures\注解.png)
+![注解.png](https://ae04.alicdn.com/kf/U4fcaae3e411b4ba8aef89ca3811c0d4fU.jpg)
 
 ## 4.JAVA 内部类
 

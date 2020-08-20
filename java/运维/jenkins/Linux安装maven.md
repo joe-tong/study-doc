@@ -12,7 +12,7 @@
 
 https://maven.apache.org/download.cgi
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps11.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/ce72a3b7a6b83bcb.jpg)  
 
  
 
@@ -20,7 +20,7 @@ https://maven.apache.org/download.cgi
 
 1.将下载好的maven安装包放在磁盘的 /usr/local/ 目录下，如下图：
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps12.jpg) 
+ ![](https://ftp.bmp.ovh/imgs/2020/08/330c7095451453f9.jpg)  
 
 2.解压apache-maven-3.6.3-bin.tar.gz文件。如下图：
 
@@ -29,7 +29,7 @@ tar -zxvf apache-maven-3.6.3-bin.tar.gz
 
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps13.jpg) 
+![wps13.jpg](https://ae04.alicdn.com/kf/Ucbf9ac46417f4493988dda3eeb5552c29.jpg) 
 
 3.配置maven仓库，设置阿里镜像仓库，一定要配置一下，国内的下载jar快些，首先进入cd apache-maven-3.6.3目录，创建仓库存储目录，mkdir ck。如下图：
 
@@ -38,10 +38,10 @@ cd apache-maven-3.6.3   #进入apache-maven-3.6.3目录
 ```
 
 ```
-mkdir ck    #创建ck目录
+mkdir ck    #创建ck目录 
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps14.jpg) 
+![wps14.jpg](https://ae02.alicdn.com/kf/Uc8840b954a9740cea91ca32cd510a8a7I.jpg)
 
 4.进入cd conf目录，编辑 vi settings.xml文件，找到·localRepository下面复制一行加上<localRepository>/usr/local/apache-maven-3.6.3/ck</localRepository>， 在找到mirror 加上阿里的仓库配置，配置完成报错退出，如下图：
 
@@ -57,14 +57,10 @@ vi settings.xml # settings.xm文件
   <name>aliyun maven</name>
   <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
   <mirrorOf>central</mirrorOf>
-</mirror>
+</mirror> 
 ```
 
-
-
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps15.jpg) 
-
- ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps16.jpg)
+![wps16.jpg](https://ae03.alicdn.com/kf/U7d8a7ba35f1b4c55b5627089dd5588a1M.jpg) 
 
 5.配置maven环境变量，编辑：vi /etc/profile 文件，翻到最后一行加上 export MAVEN_HOME=/usr/local/apache-maven-3.6.3  export PATH=$PATH:$MAVEN_HOME/bin  保存退出，如下图：
 
@@ -75,10 +71,10 @@ vi /etc/profile
 ```
 export MAVEN_HOME=/usr/local/apache-maven-3.6.3
 
-export PATH=$PATH:$MAVEN_HOME/bin
+export PATH=$PATH:$MAVEN_HOME/bin 
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps17.jpg) 
+![wps17.jpg](https://ae04.alicdn.com/kf/Ufe0056d404db40e791c7ff16d064a0bfS.jpg)
 
 6.重新加载一下，source /etc/profile 使新增配置生效，如下：
 
@@ -86,7 +82,7 @@ export PATH=$PATH:$MAVEN_HOME/bin
 source /etc/profile
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps18.jpg) 
+
 
 7.到此以安装完成，测试一下，输入命令：mvn -v ，如下：
 
@@ -94,7 +90,7 @@ source /etc/profile
 mvn -v
 ```
 
-![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11992\wps19.jpg) 
+![wps19.jpg](https://ae03.alicdn.com/kf/U2a06050dbf124871a5d7e8802452d1b5N.jpg) 
 
  
 

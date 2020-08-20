@@ -1,6 +1,6 @@
 # Java数据结构篇
 
-![1597113579054](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1597113579054.png)
+![1597113579054.png](https://ae04.alicdn.com/kf/Udd2ba353cee04231b4105a3fe595aa8aX.jpg)
 
 ## 1.Collection
 

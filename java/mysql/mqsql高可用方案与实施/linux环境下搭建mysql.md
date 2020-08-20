@@ -2,7 +2,7 @@
 
 下载地址：https://dev.mysql.com/downloads/mysql/5.7.html#downloads
 
-![1595818599280](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1595818599280.png)
+![1595818599280.png](https://ae03.alicdn.com/kf/Uf176d9718f7948dd98ff2467c448e1a8m.jpg)
 
 #### 解压
 

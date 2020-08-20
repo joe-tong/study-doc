@@ -12,17 +12,15 @@
 
 ## 小试牛刀，筛选鱼
 
-一般做法，首先创建一个鱼这个类，然后getSelectFish，遍历所有的鱼，如果有匹配的就放到数组里面，最后返回。以后有扩展，复制一份getSelectFish,里面的判断换掉就行了。
+一般做法，首先创建一个鱼这个类，然后getSelectFish，遍历所有的鱼，如果有匹配的就放到数组里面，最后返回。以后有扩展，复制一份getSelectFish,里面的判断换掉就行了。 ![1596766640372.png](https://ae04.alicdn.com/kf/Udf2b4fd2425646a4b5dcc6790a3c173b3.jpg) 
 
-![1596766640372](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596766640372.png)
-
-![1596767394456](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596767394456.png)
+![1596767394456.png](https://ae02.alicdn.com/kf/U825c072de4fc4b0cbcb8b16545b26be2W.jpg)
 
 ## 初步改进
 
 把过滤参数放到方法签名里面，这样是不是就会减少复制的代码，但是请注意，如果在加一个筛选条件是不是又要复制一份，多一个参数。作为软件工程师怎么能打破DRY(do not repeat yourself)的软件工程原则呢？
 
-![1596769829304](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596769829304.png)
+![1596769829304.png](https://ae04.alicdn.com/kf/U5f9f405845fc452db059c46b2fc530e3V.jpg)
 
 ## 行为参数化
 
@@ -30,25 +28,25 @@
 
 言以蔽之，它意味着拿出一个代码块，把它准备好却不去执行它。这个代码块以后可以被程序的其他部分调用，这意味着可以推迟这块代码的执行例如，可以将代码块作为参数传递给另一个方法，稍后再去执行它。这样，这个方法的行为就基于那块代码被参数化了。 
 
-![1596770465308](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596770465308.png)
+![1596770465308.png](https://ae02.alicdn.com/kf/Ua0f1139ad2344dc992b80047a8a348efA.jpg)
 
-![1596770506404](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596770506404.png)
+![1596770506404.png](https://ae04.alicdn.com/kf/U36884e8365394271b65c6ebaa4e54dae6.jpg)
 
-![1596770543932](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596770543932.png)
+![1596770543932.png](https://ae03.alicdn.com/kf/U339811567e884fe68942d39f4833088e9.jpg)
 
-![1596770434696](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596770434696.png)
+![1596770434696.png](https://ae04.alicdn.com/kf/Ubc627d13ec54448ea09b831952cb66b5r.jpg)
 
 这样getSelectFish就可以适应所有的过滤条件，再也不用重复写getSelectFish了，当然你如果觉得这样就结束了，那你太没有追求了，我们如何优化代码呢？
 
 ## 优化代码
 
-![1596770926037](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596770926037.png)
+![1596770926037.png](https://ae04.alicdn.com/kf/U9eca7ec2cc56477a88151795a24635b44.jpg)
 
 通过Lambda表达式可以把几个过滤类去掉，是不是更简单了，优化的路上我们要坚持不懈，如何可以更优化呢？
 
 ## 泛型进行通用
 
-![1596771137705](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1596771137705.png)
+![1596771137705.png](https://ae04.alicdn.com/kf/Ud436eb43309b45ce8b5a908978885a05d.jpg)
 
 这样getSelectFish是不是更加通用了，可以适配所有的实物了
 

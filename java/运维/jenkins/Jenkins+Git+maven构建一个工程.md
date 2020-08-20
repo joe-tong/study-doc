@@ -2,7 +2,7 @@
 
 ## 1.添加插件
 
-![1594885368786](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1594885368786.png)
+![1594885368786.png](https://ae03.alicdn.com/kf/U6d63632205dc40aea92ab369e0cd2b91G.jpg)
 
 ```
 1.Maven Integration plugin
@@ -13,7 +13,7 @@
 
 ## 2.系统配置
 
-![1595319618408](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1595319618408.png)
+![1595319618408.png](https://ae04.alicdn.com/kf/U76c3db48f4274a40a5579b55870081a1b.jpg)
 
 ```
 Name: 服务名称（随便写）
@@ -27,7 +27,7 @@ Passphrase / Password: 主机登录密码
 
 #### 3.1 general配置
 
-![1595416261957](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1595416261957.png)
+![1595416261957.png](https://ae02.alicdn.com/kf/Uefba84806e39472da6b1da47f97308dcd.jpg)
 
 分支切换
 
@@ -115,11 +115,7 @@ node {
 
 3.2.2 piple script from  scm
 
-
-
-
-
-![1595320152361](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1595320152361.png)
+![1595320152361.png](https://ae03.alicdn.com/kf/U84dfdfb0894e482ea26785a7b7ca052aJ.jpg)
 
 配置  git仓库
 
