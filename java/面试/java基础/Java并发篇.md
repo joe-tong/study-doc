@@ -1,5 +1,7 @@
 # Java并发篇
 
+ **作者：星晴（当地小有名气，小到只有自己知道的杰伦粉）**
+
 ![juc.png](https://ae03.alicdn.com/kf/Ua7faa831f6b24e429c9810996f52cfc1m.jpg)
 
 ![1597134495777.png](https://ae03.alicdn.com/kf/U73addd47fbf043cca53de4e4abb7301aP.jpg)
@@ -317,3 +319,8 @@ AQS 定义了一套多线程访问 共享资源的同步器框架
 ## 9.Unsafe 
 
 ![1597371011_1_.png](https://ae03.alicdn.com/kf/U449608813f3e4d5a9e6cefbce0430326C.jpg)
+
+关注公众号，有更多好玩的等着你！！！
+
+![img](https://mmbiz.qpic.cn/mmbiz_jpg/YicpKkSXicfO23aLicEHTNZibc8zxtW31NSibuCibDgOk3UhJBq90Z1ibXdotRAzibukOAiaicYmWNZFm6R3YzolcOdbdE9Q/640?wx_fmt=jpeg)  
+

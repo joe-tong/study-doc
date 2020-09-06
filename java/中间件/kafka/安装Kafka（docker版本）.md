@@ -58,3 +58,4 @@ cd /opt/kafka_2.12-2.3.0/bin/
 ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sun --from-beginning
 ```
 
+熟悉junit单元测试等主流测试框架、熟悉网络通讯技术Socket、Http、了解NIO、Netty、WebSocket

@@ -1,5 +1,7 @@
 # Jenkins构建Pipeline工程
 
+ **作者：星晴（当地小有名气，小到只有自己知道的杰伦粉）**
+
 ## 1.添加插件
 
 ![1594885368786.png](https://ae03.alicdn.com/kf/U6d63632205dc40aea92ab369e0cd2b91G.jpg)
@@ -236,3 +238,6 @@ docker run --name $SERVER_NAME -d -p 8080:8443 $SERVER_NAME:v${DATE}
 echo "$SERVER_NAME容器启动完成"
 ```
 
+关注公众号，有更多好玩的等着你！！！
+
+![img](https://mmbiz.qpic.cn/mmbiz_jpg/YicpKkSXicfO23aLicEHTNZibc8zxtW31NSibuCibDgOk3UhJBq90Z1ibXdotRAzibukOAiaicYmWNZFm6R3YzolcOdbdE9Q/640?wx_fmt=jpeg)  

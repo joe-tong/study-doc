@@ -182,7 +182,7 @@ Spring 装配包括手动装配和自动装配，手动装配是有基于 xml �
 
 
 
-## 7. Spring APO 原理
+## 7. Spring AOP原理
 
 ![1597307575178.png](https://ae02.alicdn.com/kf/U45f4feca6deb4563a3fdd547a3f1c197N.jpg)
 
