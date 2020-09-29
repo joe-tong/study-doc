@@ -106,7 +106,7 @@ MYISAM只有表锁，没有行锁，所以不支持事务；
 - 不可重读（Non-Repeatable Reads）: 一个事务在读取某些数据后的某个时间，再次读取以前读过的数据，却发现 其读出的数据已经发生了改变、或某些记录已经被删除了！这种现象就叫做“不 可重复读”。 一句话：事务A读取到了事务B已经提交的修改数据，不符合隔离性 
 - 幻读（Phantom Reads）: 一个事务按相同的查询条件重新读取以前检索过的数据，却发现其他事务插 入了满足其查询条件的新数据，这种现象就称为“幻读”。 一句话：事务A读取到了事务B提交的新增数据，不符合隔离性
 
-##### 1.2.1.3隔离级别控制并发事务带来的问题
+##### 1.2.1.3 隔离级别控制并发事务带来的问题
 
 ```
 脏读”、“不可重复读”和“幻读”,其实都是数据库读一致性问题,必须由数据库提供一定的事务隔离机制来解决。
@@ -175,13 +175,12 @@ INSERT INTO `test`.`account` (`name`, `balance`) VALUES ('lucy', '2400');
    <a href="https://sm.ms/image/qwSvjE7zmgGuo65" target="_blank"><img src="https://i.loli.net/2020/09/29/qwSvjE7zmgGuo65.jpg" style="zoom:50%;"  ></a>
 
    ```
-在客户端A执行更新语句update account set balance = balance - 50 where id =1，
+  在客户端A执行更新语句update account set balance = balance - 50 where id =1，
+   ```
 
 lilei的balance没有变成350，居然是400，是不是很奇怪，数据不 一致啊;
 
 如果你这么想就太天真 了，在应用程序代码中，我们可能会用400-50=350，然后set balance的值，并不知道其他会话回滚了，要想    解决这个问题可以采用读已提交的隔离级别
-   ```
-
 ###### 读已提交
 
 问题：不可重复读、幻读
@@ -224,25 +223,25 @@ lilei的balance没有变成350，居然是400，是不是很奇怪，数据不 �
 
 - 打开一个客户端A和B客户端，并设置当前事务模式为read repeated（重复读），查询表account的所有记录：
 
-​      set tx_isolation='repeatable-read';
+  set tx_isolation='repeatable-read';
 
-​      begin;
+  begin;
 
-​      <a href="https://sm.ms/image/P6MTf7Wq1tbHRDx" target="_blank"><img src="https://i.loli.net/2020/09/29/P6MTf7Wq1tbHRDx.jpg" style="zoom:50%;"  ></a>
+  <a href="https://sm.ms/image/P6MTf7Wq1tbHRDx" target="_blank"><img src="https://i.loli.net/2020/09/29/P6MTf7Wq1tbHRDx.jpg" style="zoom:50%;"  ></a>
 
 - 打卡客户端B进行修改account数据，客户端A在客户端B提交前和提交后查询数据,查询的数据一致，说明解决了**不可重复读**：
 
-​       update account set balance = balance - 50 where id = 1;
+   update account set balance = balance - 50 where id = 1;
 
-​       commit;
+   commit;
 
-​       select * from account;
+   select * from account;
 
-​       <a href="https://sm.ms/image/B87aSk4rqhVyLxd" target="_blank"><img src="https://i.loli.net/2020/09/29/B87aSk4rqhVyLxd.jpg" style="zoom:50%;"  ></a>
+   <a href="https://sm.ms/image/B87aSk4rqhVyLxd" target="_blank"><img src="https://i.loli.net/2020/09/29/B87aSk4rqhVyLxd.jpg" style="zoom:50%;"  ></a>
 
-​       <a href="https://sm.ms/image/MQguAdtFhoIW6SN" target="_blank"><img src="https://i.loli.net/2020/09/29/MQguAdtFhoIW6SN.jpg" style="zoom:50%;"  ></a>
+   <a href="https://sm.ms/image/MQguAdtFhoIW6SN" target="_blank"><img src="https://i.loli.net/2020/09/29/MQguAdtFhoIW6SN.jpg" style="zoom:50%;"  ></a>
 
-​       可重复读的隔离级别下使用了MVCC(multi-version concurrency control)机制，select操作 不会更新版本号，是快照读（历史版本）；insert、update和delete会更新版本 号，是当前读（当前版本）。**MVCC等会精讲**
+   可重复读的隔离级别下使用了MVCC(multi-version concurrency control)机制，select操作 不会更新版本号，是快照读（历史版本）；insert、update和delete会更新版本 号，是当前读（当前版本）。**MVCC等会精讲**
 
 - 客户端B如果insert 一条数据，然后提交：
 
@@ -256,7 +255,7 @@ lilei的balance没有变成350，居然是400，是不是很奇怪，数据不 �
 
    select * from account;
 
-​       <a href="https://sm.ms/image/HS3to2qzRX8blZa" target="_blank"><img src="https://i.loli.net/2020/09/29/HS3to2qzRX8blZa.jpg" style="zoom:50%;"  ></a>
+   <a href="https://sm.ms/image/HS3to2qzRX8blZa" target="_blank"><img src="https://i.loli.net/2020/09/29/HS3to2qzRX8blZa.jpg" style="zoom:50%;"  ></a>
 
 - 客户端A没有查询到，但是能够操作客户端B插入到数据吗？实际可以：
 
@@ -306,27 +305,27 @@ mysql中事务隔离级别为serializable时会锁表，因此 不会出现幻�
 
    begin;
 
-​        select * from account;
+    select * from account;
 
-​       <a href="https://sm.ms/image/fJr4wOzsmiMCUkq" target="_blank"><img src="https://i.loli.net/2020/09/29/fJr4wOzsmiMCUkq.jpg" style="zoom:50%;"  ></a>
+   <a href="https://sm.ms/image/fJr4wOzsmiMCUkq" target="_blank"><img src="https://i.loli.net/2020/09/29/fJr4wOzsmiMCUkq.jpg" style="zoom:50%;"  ></a>
 
-​      <a href="https://sm.ms/image/d3FjMlyiTWRxVcu" target="_blank"><img src="https://i.loli.net/2020/09/29/d3FjMlyiTWRxVcu.jpg" style="zoom:50%;"  ></a>
+    <a href="https://sm.ms/image/d3FjMlyiTWRxVcu" target="_blank"><img src="https://i.loli.net/2020/09/29/d3FjMlyiTWRxVcu.jpg" style="zoom:50%;"  ></a>
 
 - 客户端B没法在这个范围所包含的 间隙里插入或修改任何数据
 
-​       <a href="https://sm.ms/image/FGAYuj8ONeprmCa" target="_blank"><img src="https://i.loli.net/2020/09/29/FGAYuj8ONeprmCa.jpg" style="zoom:50%;"  ></a>
+   <a href="https://sm.ms/image/FGAYuj8ONeprmCa" target="_blank"><img src="https://i.loli.net/2020/09/29/FGAYuj8ONeprmCa.jpg" style="zoom:50%;"  ></a>
 
 ###### 无索引行锁会升级为表锁
 
 - 锁主要是加在索引上，如果对非索引字段更新, 行锁可能会变表锁 客户端A执行：
 
-​       update account set balance = 800 where name = 'lilei'; 
+       update account set balance = 800 where name = 'lilei'; 
 
 - 客户端B对该表任一行操作都会阻塞住 InnoDB的行锁是针对索引加的锁，不是针对记录加的锁。并且该索引不能失 效，否则都会从行锁升级为表锁。
 
 ###### 案例结论:
 
-​       Innodb存储引擎由于实现了行级锁定，虽然在锁定机制的实现方面所带来的 性能损耗可能比表级锁定会要更高一下，但是在整体并发处理能力方面要远远优 于MYISAM的表级锁定的。当系统并发量高的时候，Innodb的整体性能和 MYISAM相比就会有比较明显的优势了。
+       Innodb存储引擎由于实现了行级锁定，虽然在锁定机制的实现方面所带来的 性能损耗可能比表级锁定会要更高一下，但是在整体并发处理能力方面要远远优 于MYISAM的表级锁定的。当系统并发量高的时候，Innodb的整体性能和 MYISAM相比就会有比较明显的优势了。
 
 
 
