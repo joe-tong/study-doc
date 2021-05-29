@@ -1,0 +1,9 @@
+version: '3'
+services: 
+ web: #指定服务名 
+   build: .
+   ports: 
+    - "9099:9099"
+   expose: 
+    - "9099" #声明容器对外暴露的端口
+     
